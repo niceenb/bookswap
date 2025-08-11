@@ -12,7 +12,13 @@ const Navbar = () => {
 
   return (
     <nav className="bg-blue-600 text-white p-4 flex justify-between items-center">
-      <Link to="/" className="text-2xl font-bold">Book Swap</Link>
+      <div className="flex items-center space-x-4">
+        <Link to="/" className="text-2xl font-bold">
+          Book Swap
+        </Link>
+        <Link to="/">Home Page</Link>
+      </div>
+
       <div>
         {user ? (
           <>
