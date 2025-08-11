@@ -1,7 +1,13 @@
 const AllBookList = ({ books, userId }) => {
-  const filteredBooks = userId
-    ? books.filter((book) => String(book.userId) !== String(userId))
-    : books;
+  const filteredBooks = !userId
+    ? books
+    : books.filter((book) => {
+        // Determine the book owner's ID safely
+        const bookOwnerId =
+          book.userId && typeof book.userId === 'object' ? book.userId._id : book.userId;
+
+        return String(bookOwnerId) !== String(userId);
+      });
 
   const handleRequest = (bookId) => {
     alert(`Request sent for book ID: ${bookId}`);
