@@ -18,11 +18,17 @@ const getAllBooks = async (req, res) => {
   }
 };
 
-
 const addBook = async (req, res) => {
-  const { title, author, publishedDate, genre } = req.body;
+  const { title, author, publishedDate, genre, availability } = req.body; 
   try {
-    const book = await Book.create({ userId: req.user.id, title, author, publishedDate, genre });
+    const book = await Book.create({
+      userId: req.user.id,
+      title,
+      author,
+      publishedDate,
+      genre,
+      availability: availability !== undefined ? availability : true, 
+    });
     res.status(201).json(book);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -30,7 +36,7 @@ const addBook = async (req, res) => {
 };
 
 const updateBook = async (req, res) => {
-  const { title, author, publishedDate, genre } = req.body;
+  const { title, author, publishedDate, genre, availability } = req.body; 
   try {
     const book = await Book.findById(req.params.id);
     if (!book) return res.status(404).json({ message: 'Book not found' });
@@ -39,6 +45,10 @@ const updateBook = async (req, res) => {
     book.author = author || book.author;
     book.publishedDate = publishedDate || book.publishedDate;
     book.genre = genre || book.genre;
+
+    if (availability !== undefined) {
+      book.availability = availability;
+    }
 
     const updatedBook = await book.save();
     res.json(updatedBook);
