@@ -29,6 +29,9 @@ const BookList = ({ books, setBooks, setEditingBook }) => {
               Published: {new Date(book.publishedDate).toLocaleDateString()}
             </p>
           )}
+          <p className="mb-1 text-gray-700">
+            <strong>Availability:</strong> {book.availability ? 'Available' : 'Not Available'}
+          </p>
           <div className="mt-2">
             <button
               onClick={() => setEditingBook(book)}
