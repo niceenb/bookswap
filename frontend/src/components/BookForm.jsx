@@ -59,13 +59,13 @@ const BookForm = ({ books, setBooks, editingBook, setEditingBook }) => {
         className="w-full mb-4 p-2 border rounded"
         required
       />
-      <input
+      {/* <input
         type="date"
         placeholder="Published Date"
         value={formData.publishedDate}
         onChange={(e) => setFormData({ ...formData, publishedDate: e.target.value })}
         className="w-full mb-4 p-2 border rounded"
-      />
+      /> */}
       <input
         type="text"
         placeholder="Genre"
