@@ -23,7 +23,7 @@ const Home = () => {
   return (
     <div className="container mx-auto p-6">
       <h1 className="text-2xl font-bold mb-4">All Books</h1>
-      <AllBookList books={books} userId={user?._id} />
+      <AllBookList books={books} userId={user?.id} />
     </div>
   );
 };
