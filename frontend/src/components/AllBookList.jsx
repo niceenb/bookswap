@@ -1,15 +1,19 @@
+import { useNavigate } from "react-router-dom";
+
 const AllBookList = ({ books, userId }) => {
+  const navigate = useNavigate();
+
   const filteredBooks = !userId
     ? books
     : books.filter((book) => {
         const bookOwnerId =
-          book.userId && typeof book.userId === 'object' ? book.userId._id : book.userId;
+          book.userId && typeof book.userId === "object" ? book.userId._id : book.userId;
 
         return String(bookOwnerId) !== String(userId) && book.availability === true;
       });
 
   const handleRequest = (bookId) => {
-    alert(`Request sent for book ID: ${bookId}`);
+    navigate("/swaps", { state: { requestedBookId: bookId, requestedBy: userId } });
   };
 
   return (
@@ -22,7 +26,9 @@ const AllBookList = ({ books, userId }) => {
           <h2 className="font-bold text-xl">{book.title}</h2>
           <p className="italic mb-1">by {book.author}</p>
           {book.genre && (
-            <p className="mb-1 text-gray-700"><strong>Genre:</strong> {book.genre}</p>
+            <p className="mb-1 text-gray-700">
+              <strong>Genre:</strong> {book.genre}
+            </p>
           )}
           {book.publishedDate && (
             <p className="text-sm text-gray-500">
@@ -30,18 +36,26 @@ const AllBookList = ({ books, userId }) => {
             </p>
           )}
           {userId && (
-            <p className={`font-semibold mt-2 ${book.availability ? 'text-green-600' : 'text-red-600'}`}>
-              {book.availability ? 'Available' : 'Not Available'}
-            </p>
+            <>
+              <p
+                className={`font-semibold mt-2 ${
+                  book.availability ? "text-green-600" : "text-red-600"
+                }`}
+              >
+                {book.availability ? "Available" : "Not Available"}
+              </p>
+              {book.availability && (
+                <div className="mt-2">
+                  <button
+                    onClick={() => handleRequest(book._id)}
+                    className="bg-blue-600 text-white px-4 py-2 rounded"
+                  >
+                    Request
+                  </button>
+                </div>
+              )}
+            </>
           )}
-          <div className="mt-2">
-            <button
-              onClick={() => handleRequest(book._id)}
-              className="bg-blue-600 text-white px-4 py-2 rounded"
-            >
-              Request
-            </button>
-          </div>
         </div>
       ))}
     </div>
