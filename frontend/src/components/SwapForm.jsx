@@ -10,7 +10,7 @@ const SwapForm = ({ books, userId }) => {
 
   const [selectedBook, setSelectedBook] = useState(null);
   const [requestedBook, setRequestedBook] = useState(null);
-  const [message, setMessage] = useState("");
+  const [message] = useState("");
 
   const requestedBookId = location.state?.requestedBookId;
 
@@ -61,7 +61,7 @@ const SwapForm = ({ books, userId }) => {
         }
       );
 
-      navigate("/swap-requests"); // ✅ redirect on success
+      navigate("/swap-requests");
     } catch (error) {
       console.error("Swap request failed:", error);
       alert("Failed to submit swap request.");

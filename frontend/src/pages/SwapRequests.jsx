@@ -16,7 +16,6 @@ const SwapRequests = () => {
         const response = await axiosInstance.get('/api/swaps', {
           headers: { Authorization: `Bearer ${user.token}` },
         });
-        // ✅ Sort by newest first
         const sortedSwaps = response.data.sort(
           (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
         );
@@ -53,7 +52,6 @@ const SwapRequests = () => {
         headers: { Authorization: `Bearer ${user.token}` },
       });
 
-      // ✅ Only update availability if accepted
       if (action === 'accepted') {
         await Promise.all([
           axiosInstance.put(`/api/books/${requestedBook._id}`, {

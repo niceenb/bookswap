@@ -1,4 +1,4 @@
-const Swap = require('../models/Swap'); // You’ll need to create this model
+const Swap = require('../models/Swap');
 const Book = require('../models/Book');
 
 const createSwapRequest = async (req, res) => {
@@ -38,7 +38,6 @@ const getUserSwaps = async (req, res) => {
     })
     .populate('requestedBy', 'name');
 
-    // Convert _id fields to strings
     const formattedSwaps = swaps.map(swap => ({
       ...swap.toObject(),
       _id: swap._id.toString(),
@@ -86,7 +85,6 @@ const deleteSwap = async (req, res) => {
     const swap = await Swap.findById(req.params.id);
     if (!swap) return res.status(404).json({ message: 'Swap not found' });
 
-    // ✅ Ensure only the requesting user can delete their own swap
     if (String(swap.requestedBy) !== req.user.id) {
       return res.status(403).json({ message: 'Not authorized to cancel this swap' });
     }
