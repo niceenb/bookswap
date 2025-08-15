@@ -84,9 +84,10 @@ npm install
 ### 2. Create environment variable files
 
 Create .env file in backend folder and put
+Please find the username and password in the report
 
 ```
-MONGO_URI=mongodb+srv://BookSwap_Admin:bookswap123@cluster0.gi0e16z.mongodb.net/BookSwap?retryWrites=true&w=majority&appName=Cluster0
+MONGO_URI=mongodb+srv://[USERNAME]:[PASSWORD]@cluster0.gi0e16z.mongodb.net/BookSwap?retryWrites=true&w=majority&appName=Cluster0
 JWT_SECRET=2J8zqkP7VN6bxzg+Wy7DQZsd3Yx8mF3Bl0kch6HYtFs=
 PORT=5001
 ```

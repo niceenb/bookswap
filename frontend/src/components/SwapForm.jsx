@@ -69,27 +69,29 @@ const SwapForm = ({ books, userId }) => {
   };
 
   return (
-    <div className="bg-gray-100 p-6 rounded shadow">
+    <div className="bg-white p-8 rounded-xl shadow-lg max-w-xl mx-auto mt-6">
+      <h2 className="text-2xl font-bold text-blue-700 mb-6 text-center">
+        Book Swap Request
+      </h2>
+
       {requestedBook ? (
-        <div className="mb-4 p-4 bg-white rounded border">
-          <p>
-            <strong>Requested Book:</strong> {requestedBook.title} by{" "}
-            {requestedBook.author}
+        <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+          <p className="text-lg font-medium text-blue-800">
+            <strong>Requested Book:</strong> {requestedBook.title} by {requestedBook.author}
           </p>
         </div>
       ) : (
-        <p className="text-red-500 mb-4">Requested book not found.</p>
+        <p className="text-red-500 mb-6 text-center">Requested book not found.</p>
       )}
 
-      <h2 className="font-bold text-xl mb-4">Select Your Book to Swap</h2>
-
+      <label className="block font-semibold mb-2">Select Your Book to Offer</label>
       {filteredBooks.length === 0 ? (
-        <p className="text-center text-gray-500">No available books found.</p>
+        <p className="text-center text-gray-500 mb-4">No available books found.</p>
       ) : (
         <select
           value={selectedBook?._id || ""}
           onChange={handleSelectChange}
-          className="w-full border p-2 rounded"
+          className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value="">-- Choose a book --</option>
           {filteredBooks.map((book) => (
@@ -101,17 +103,16 @@ const SwapForm = ({ books, userId }) => {
       )}
 
       {selectedBook && (
-        <div className="mt-4 p-4 bg-white rounded border">
-          <p>
-            <strong>Selected Book:</strong> {selectedBook.title} by{" "}
-            {selectedBook.author}
+        <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+          <p className="text-lg font-medium text-green-800">
+            <strong>Selected Book:</strong> {selectedBook.title} by {selectedBook.author}
           </p>
         </div>
       )}
 
       <button
         onClick={handleSubmit}
-        className="mt-4 bg-blue-600 text-white px-4 py-2 rounded"
+        className="mt-6 w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold py-3 rounded-lg hover:scale-105 transition-transform duration-200"
       >
         Submit Swap Request
       </button>

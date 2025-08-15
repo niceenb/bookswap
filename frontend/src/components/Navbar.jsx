@@ -11,39 +11,52 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-blue-600 text-white p-4 flex justify-between items-center">
-      <div className="flex items-center space-x-4">
-        <Link to="/" className="text-2xl font-bold">
-          Book Swap
-        </Link>
-        <Link to="/">Home Page</Link>
-      </div>
+    <nav className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white px-6 py-4 shadow-md">
+      <div className="flex flex-wrap justify-between items-center">
+        {/* Left Section */}
+        <div className="flex items-center space-x-6">
+          <Link to="/" className="text-2xl font-extrabold tracking-wide hover:text-yellow-300 transition-colors duration-200">
+            BookSwap
+          </Link>
+          <Link to="/" className="hover:text-yellow-300 transition-colors duration-200">
+            Home
+          </Link>
+        </div>
 
-      <div>
-        {user ? (
-          <>
-            {/* <Link to="/tasks" className="mr-4">Task</Link> */}
-            <Link to="/books" className="mr-4">My Book</Link>
-            <Link to="/swap-requests" className="mr-4">Swap Request</Link>
-            <Link to="/profile" className="mr-4">Profile</Link>
-            <button
-              onClick={handleLogout}
-              className="bg-red-500 px-4 py-2 rounded hover:bg-red-700"
-            >
-              Logout
-            </button>
-          </>
-        ) : (
-          <>
-            <Link to="/login" className="mr-4">Login</Link>
-            <Link
-              to="/register"
-              className="bg-green-500 px-4 py-2 rounded hover:bg-green-700"
-            >
-              Register
-            </Link>
-          </>
-        )}
+        {/* Right Section */}
+        <div className="flex items-center space-x-4 mt-2 sm:mt-0">
+          {user ? (
+            <>
+              <Link to="/books" className="hover:text-yellow-300 transition-colors duration-200">
+                My Books
+              </Link>
+              <Link to="/swap-requests" className="hover:text-yellow-300 transition-colors duration-200">
+                Swap Requests
+              </Link>
+              <Link to="/profile" className="hover:text-yellow-300 transition-colors duration-200">
+                Profile
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-full transition-transform duration-200 hover:scale-105"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/login" className="hover:text-yellow-300 transition-colors duration-200">
+                Login
+              </Link>
+              <Link
+                to="/register"
+                className="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-full transition-transform duration-200 hover:scale-105"
+              >
+                Register
+              </Link>
+            </>
+          )}
+        </div>
       </div>
     </nav>
   );
