@@ -1,5 +1,112 @@
+# Online Book Swap Portal
 
-**Assessment 1 (Total Marks **20**)**
+An online web application that allows users to list, browse, and swap books with others. Built with Node.js, Express, MongoDB, and React, the system supports user authentication, book management, swap requests, transaction logging, notification and messaging.
+
+## Features
+
+- **User Authentication**: Register, login, and provide secure access.
+- **Book Management**: Add, update, delete, and view books.
+- **Book Swapping**: Request swaps, accept or cancel them, and track swap status.
+- **Notifications**: Get alerts when a swap is matched or updated.
+- **Transaction Logging**: All swaps are recorded for traceability.
+- **CI/CD Integration**: Automated testing and deployment via GitHub Actions.
+
+---
+
+## GitHub Version Control
+
+- Main branch contains stable production-ready code.
+- Feature branches were used for each new functionality.
+- Pull requests were submitted for code reviews and merging.
+- GitHub repo: [https://github.com/niceenb/bookswap]
+
+---
+
+## Public URLs
+
+**Frontend**: [http://3.107.20.255/]
+**Backend API**: [http://3.107.20.255/5001]
+
+---
+
+## Jira Board
+
+[https://natnichab.atlassian.net/jira/software/projects/A1/list?atlOrigin=eyJpIjoiNWEzM2Y1NDMyNjlkNGEwYWIzNzkxZmVkZjUzMDViYzMiLCJwIjoiaiJ9]
+
+---
+
+### Example and testing user
+
+Username: test@mail.com
+Password: test
+
+---
+
+## CI/CD Workflow
+
+This project uses **GitHub Actions** for CI/CD:
+
+1. **On Push to `main` branch**:
+   - Backend & frontend dependencies are installed (`npm ci`)
+   - Tests are run (`npm test`)
+   - Build is created for production
+   - Deploys to the EC2 server via SSH
+
+2. **Deployment Server**:
+   - **Process Manager**: PM2
+   - **Reverse Proxy**: Nginx
+   - **OS**: Ubuntu 22.04 LTS
+
+---
+
+## Local Setup Instructions
+
+### 1. Clone the repository and setup
+
+```bash
+git clone https://github.com/niceenb/bookswap.git
+
+cd bookswap
+```
+
+**Backend Setup**
+```bash
+cd backend
+npm install
+```
+
+**Frontend Setup**
+```bash
+cd ../frontend
+npm install
+```
+
+### 2. Create environment variable files
+
+Create .env file in backend folder and put
+
+```
+MONGO_URI=mongodb+srv://BookSwap_Admin:bookswap123@cluster0.gi0e16z.mongodb.net/BookSwap?retryWrites=true&w=majority&appName=Cluster0
+JWT_SECRET=2J8zqkP7VN6bxzg+Wy7DQZsd3Yx8mF3Bl0kch6HYtFs=
+PORT=5001
+```
+
+### 3. Run the application locally
+
+**Start backend**
+```bash
+cd backend
+npm start
+```
+
+**Start frontend**
+```bash
+cd ../frontend
+npm start
+```
+
+
+<!-- **Assessment 1 (Total Marks **20**)**
 
 Assignment: **Software requirements analysis and design (**Full-Stack CRUD Application Development with DevOps Practices**)**
 
@@ -91,4 +198,4 @@ We will send you an email to choose a Real-World project. If you face any diffic
 * Clarity and completeness of Jira board and SysML models.
 * Adherence to Git best practices and practical contributions.
 * Successful implementation, deploymentand CI/CD pipeline.
-* Problem-solving skills and the ability to go beyond basic requirements.
+* Problem-solving skills and the ability to go beyond basic requirements. -->
