@@ -55,19 +55,13 @@ const SwapRequests = () => {
       if (action === 'accepted') {
         await Promise.all([
           axiosInstance.put(`/api/books/${requestedBook._id}`, {
-            title: requestedBook.title,
-            author: requestedBook.author,
-            publishedDate: requestedBook.publishedDate,
-            genre: requestedBook.genre,
+            ...requestedBook,
             availability: false,
           }, {
             headers: { Authorization: `Bearer ${user.token}` },
           }),
           axiosInstance.put(`/api/books/${offeredBook._id}`, {
-            title: offeredBook.title,
-            author: offeredBook.author,
-            publishedDate: offeredBook.publishedDate,
-            genre: offeredBook.genre,
+            ...offeredBook,
             availability: false,
           }, {
             headers: { Authorization: `Bearer ${user.token}` },
@@ -95,28 +89,42 @@ const SwapRequests = () => {
     swap => swap.requestedBook?.userId && String(swap.requestedBook.userId._id) === currentUserId
   );
 
-  return (
-    <div className="container mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4">Your Swap Requests</h1>
+  const statusBadge = (status) => {
+    const base = "px-2 py-1 rounded-full text-sm font-semibold";
+    switch (status) {
+      case "pending":
+        return `${base} bg-yellow-100 text-yellow-700`;
+      case "accepted":
+        return `${base} bg-green-100 text-green-700`;
+      case "rejected":
+        return `${base} bg-red-100 text-red-700`;
+      default:
+        return `${base} bg-gray-100 text-gray-700`;
+    }
+  };
 
-      {error && <p className="text-red-500 mb-4">{error}</p>}
+  return (
+    <div className="max-w-4xl mx-auto p-6">
+      <h1 className="text-3xl font-bold text-blue-700 mb-6 text-center">Swap Requests</h1>
+
+      {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
 
       {/* Sent Requests */}
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">Sent Requests</h2>
+      <div className="mb-10">
+        <h2 className="text-xl font-semibold mb-4 text-gray-800">Sent Requests</h2>
         {sent.length === 0 ? (
           <p className="text-gray-500">You haven't sent any swap requests.</p>
         ) : (
-          <ul className="space-y-2">
+          <ul className="space-y-4">
             {sent.map((swap) => (
-              <li key={swap._id} className="p-4 bg-white rounded shadow">
+              <li key={swap._id} className="p-6 bg-white rounded-xl shadow hover:shadow-lg transition-shadow">
                 <p><strong>You offered:</strong> {swap.offeredBook.title}</p>
                 <p><strong>For:</strong> {swap.requestedBook.title}</p>
-                <p><strong>Status:</strong> {swap.status}</p>
+                <p><strong>Status:</strong> <span className={statusBadge(swap.status)}>{swap.status}</span></p>
                 <button
                   onClick={() => handleCancelSwap(swap._id, swap.status)}
                   disabled={loadingCancel || swap.status !== 'pending'}
-                  className="mt-2 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 disabled:opacity-50"
+                  className="mt-4 px-4 py-2 bg-red-500 text-white rounded-full hover:bg-red-600 disabled:opacity-50 transition-transform hover:scale-105"
                 >
                   {loadingCancel ? "Cancelling..." : "Cancel Request"}
                 </button>
@@ -128,19 +136,19 @@ const SwapRequests = () => {
 
       {/* Received Requests */}
       <div>
-        <h2 className="text-xl font-semibold mb-2">Received Requests</h2>
+        <h2 className="text-xl font-semibold mb-4 text-gray-800">Received Requests</h2>
         {received.length === 0 ? (
           <p className="text-gray-500">No one has requested your books yet.</p>
         ) : (
-          <ul className="space-y-2">
+          <ul className="space-y-4">
             {received.map((swap) => (
-              <li key={swap._id} className="p-4 bg-white rounded shadow">
+              <li key={swap._id} className="p-6 bg-white rounded-xl shadow hover:shadow-lg transition-shadow">
                 <p><strong>{swap.requestedBy.name} offered:</strong> {swap.offeredBook.title}</p>
                 <p><strong>For your book:</strong> {swap.requestedBook.title}</p>
-                <p><strong>Status:</strong> {swap.status}</p>
+                <p><strong>Status:</strong> <span className={statusBadge(swap.status)}>{swap.status}</span></p>
 
                 {swap.status === 'pending' && (
-                  <div className="mt-2 flex gap-2">
+                  <div className="mt-4 flex gap-3">
                     <button
                       onClick={() =>
                         handleSwapAction(
@@ -151,7 +159,7 @@ const SwapRequests = () => {
                         )
                       }
                       disabled={loadingAction}
-                      className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 disabled:opacity-50"
+                      className="px-4 py-2 bg-green-500 text-white rounded-full hover:bg-green-600 disabled:opacity-50 transition-transform hover:scale-105"
                     >
                       Accept
                     </button>
@@ -165,7 +173,7 @@ const SwapRequests = () => {
                         )
                       }
                       disabled={loadingAction}
-                      className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 disabled:opacity-50"
+                      className="px-4 py-2 bg-gray-500 text-white rounded-full hover:bg-gray-600 disabled:opacity-50 transition-transform hover:scale-105"
                     >
                       Reject
                     </button>
