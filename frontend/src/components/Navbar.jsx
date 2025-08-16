@@ -11,14 +11,14 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white px-6 py-4 shadow-md">
+    <nav className="bg-yellow-100 border-b border-yellow-300 text-gray-800 px-6 py-4 shadow-sm font-sans">
       <div className="flex flex-wrap justify-between items-center">
         {/* Left Section */}
         <div className="flex items-center space-x-6">
-          <Link to="/" className="text-2xl font-extrabold tracking-wide hover:text-yellow-300 transition-colors duration-200">
+          <Link to="/" className="text-2xl font-serif font-bold text-green-900 hover:text-green-950 transition-colors duration-200">
             BookSwap
           </Link>
-          <Link to="/" className="hover:text-yellow-300 transition-colors duration-200">
+          <Link to="/" className="hover:text-green-900 transition-colors duration-200">
             Home
           </Link>
         </div>
@@ -27,30 +27,30 @@ const Navbar = () => {
         <div className="flex items-center space-x-4 mt-2 sm:mt-0">
           {user ? (
             <>
-              <Link to="/books" className="hover:text-yellow-300 transition-colors duration-200">
+              <Link to="/books" className="hover:text-green-900 transition-colors duration-200">
                 My Books
               </Link>
-              <Link to="/swap-requests" className="hover:text-yellow-300 transition-colors duration-200">
+              <Link to="/swap-requests" className="hover:text-green-900 transition-colors duration-200">
                 Swap Requests
               </Link>
-              <Link to="/profile" className="hover:text-yellow-300 transition-colors duration-200">
+              <Link to="/profile" className="hover:text-green-900 transition-colors duration-200">
                 Profile
               </Link>
               <button
                 onClick={handleLogout}
-                className="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-full transition-transform duration-200 hover:scale-105"
+                className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition duration-200"
               >
                 Logout
               </button>
             </>
           ) : (
             <>
-              <Link to="/login" className="hover:text-yellow-300 transition-colors duration-200">
+              <Link to="/login" className="hover:text-green-900 transition-colors duration-200">
                 Login
               </Link>
               <Link
                 to="/register"
-                className="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-full transition-transform duration-200 hover:scale-105"
+                className="bg-green-800 hover:bg-green-900 text-white px-4 py-2 rounded transition duration-200"
               >
                 Register
               </Link>
