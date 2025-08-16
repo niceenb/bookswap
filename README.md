@@ -24,8 +24,8 @@ An online web application that allows users to list, browse, and swap books with
 
 ## Public URLs
 
-**Frontend**: [http://3.27.149.186/]
-**Backend API**: [http://3.27.149.186/5001]
+**Frontend**: [http://13.239.135.216/]
+**Backend API**: [http://13.239.135.216/5001]
 
 ---
 
